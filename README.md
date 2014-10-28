@@ -3,7 +3,9 @@ exceruby
 1.lauch command prompt on your windows PC
 
 2.enter following command
+
 cd "exceruby-directory"
+
 ruby create_chart.rb
 
 3.input start time
@@ -16,3 +18,4 @@ ruby create_chart.rb
 
 5.Select data directory
 
+6.then FROM_START_TIME_TO_END_TIME.xlsx will be created in data directory which you selected
