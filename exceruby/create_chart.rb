@@ -1,8 +1,6 @@
 require "./my_excel.rb"
 require "./csv_to_excel_cpu.rb"
 require "./csv_to_excel_jvmstat.rb"
-require "./csv_to_excel_mil.rb"
-require "./csv_to_excel_tps.rb"
 require "./csv_to_excel_memory.rb"
 require "./png_to_excel.rb"
 
