@@ -86,10 +86,22 @@ if File.exist?(root_path + "/" + time_from.gsub(/:/,"") + "_" + time_to.gsub(/:/
     File.unlink root_path + "/" + time_from.gsub(/:/,"") + "_" + time_to.gsub(/:/,"") + ".xlsx"
 end
 
+excel_obj = excel_new
+
+workbook_obj = excel_create_workbook(excel_obj)
+worksheet_obj = workbook_get_worksheet(workbook_obj,1)
+worksheet_set_name(worksheet_obj,"FROM_" + time_from.gsub(/:/,"") + "_TO_" + time_to.gsub(/:/,""))
+
 Dir::glob( root_path + "/**/*.png" ).each do |full_path|
     p full_path
-    png_to_excel( full_path, root_path, col_num, row_num, time_from, time_to )
+    png_to_excel( worksheet_obj, full_path, col_num, row_num, time_from, time_to )
     row_num = row_num + 18
 
 end
 
+excel_obj.displayAlerts  = false # force save without alert
+workbook_save( workbook_obj, root_path + "/" + time_from.gsub(/:/,"") + "_" + time_to.gsub(/:/,"") + ".xlsx")
+
+excel_quit(excel_obj)
+
+p "FINISHED save as " + root_path + "/" + time_from.gsub(/:/,"") + "_" + time_to.gsub(/:/,"") + ".xlsx";
