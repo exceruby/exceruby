@@ -3,6 +3,7 @@ require "./csv_to_excel_cpu.rb"
 require "./csv_to_excel_jvmstat.rb"
 require "./csv_to_excel_memory.rb"
 require "./csv_to_excel_netstat.rb"
+require "./csv_to_excel_tps.rb"
 require "./png_to_excel.rb"
 
 #------------------------------------------------------------------------------
@@ -75,6 +76,10 @@ Dir::glob( root_path + "/**/*.csv" ).each do |full_path|
     when /^netstat\.csv$/ #netstat.csv
         p full_path
         csv_to_excel_netstat( full_path, time_from, time_to)
+
+    when /^time_accessjournal\.csv$/ #netstat.csv
+        p full_path
+        csv_to_excel_tps( full_path, time_from, time_to)
 
     end
 

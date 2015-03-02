@@ -102,6 +102,8 @@ def worksheet_load_csv(worksheet_obj,filename, time_from, time_to )
                 col_num += 1
                 row_num = line_cells.size if row_num < line_cells.size
                 preline = line
+                worksheet_obj.Range(range( 1, 1, 1, col_num )).NumberFormatLocal = "h:mm:ss;@"
+
                 worksheet_obj.Range(range( 1, col_num, line_cells.size, col_num )).value = line_cells
          end
         end
@@ -137,6 +139,10 @@ end
 
 def chart_set_axes_max(chart_obj, max)
     chart_obj.Chart.Axes(WIN32OLE::XlValue).MaximumScale = max
+end
+
+def chart_set_axes_min(chart_obj, min)
+    chart_obj.Chart.Axes(WIN32OLE::XlValue).MinimumScale = min
 end
 
 def chart_set_source_data(chart_obj,worksheet_obj, axis_range, data_range)
