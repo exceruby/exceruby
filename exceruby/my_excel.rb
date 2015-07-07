@@ -98,6 +98,10 @@ def worksheet_load_csv(worksheet_obj,filename, time_from, time_to )
         file.each_with_index do |line,i|
             time,line_cells = yield(line,preline,i,col_num)
 
+            if time.length != 8 
+               time = time[time.length - 8, 8]
+            end
+
             if col_num == 0 or ( ( time_from <= time ) and ( time <= time_to ) )
                 col_num += 1
                 row_num = line_cells.size if row_num < line_cells.size
@@ -105,7 +109,7 @@ def worksheet_load_csv(worksheet_obj,filename, time_from, time_to )
                 worksheet_obj.Range(range( 1, 1, 1, col_num )).NumberFormatLocal = "h:mm:ss;@"
 
                 worksheet_obj.Range(range( 1, col_num, line_cells.size, col_num )).value = line_cells
-         end
+            end
         end
 
     end
@@ -147,6 +151,11 @@ end
 
 def chart_set_source_data(chart_obj,worksheet_obj, axis_range, data_range)
     chart_obj.Chart.SetSourceData worksheet_obj.Range( axis_range + "," + data_range )
+end
+
+
+def chart_set_source_data_2col(chart_obj,worksheet_obj, axis_range, data_range1,data_range2)
+    chart_obj.Chart.SetSourceData worksheet_obj.Range( axis_range + "," + data_range1 + "," + data_range2 )
 end
 
 def chart_set_plotArea(chart_obj, top, left, width, height )
